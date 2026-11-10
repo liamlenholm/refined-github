@@ -3,6 +3,69 @@ nav.rgh-extensible-nav.d-none {
 	display: flex !important;
 }
 
+/* GitHub no longer ships the base `.UnderlineNav-body` and `.UnderlineNav-item` styles */
+nav.rgh-extensible-nav {
+	.UnderlineNav-body {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.UnderlineNav-item {
+		position: relative;
+		display: flex;
+		align-items: center;
+		padding: 6px 8px;
+		border-radius: 6px;
+		color: var(--fgColor-default, fuchsia);
+		line-height: 20px;
+		white-space: nowrap;
+
+		&:hover {
+			background-color: var(--control-transparent-bgColor-hover, fuchsia);
+			text-decoration: none;
+		}
+
+		&.selected {
+			font-weight: 600;
+
+			/* Some pages still load a native rule with `right: 50%` and `transform`, so override those too */
+			&::after {
+				content: '';
+				position: absolute;
+				right: 0;
+				bottom: -8px;
+				left: 0;
+				width: auto;
+				height: 2px;
+				border-radius: 6px;
+				background-color: var(--underlineNav-borderColor-active, fuchsia);
+				transform: none;
+			}
+		}
+	}
+
+	.UnderlineNav-octicon {
+		color: var(--fgColor-muted, fuchsia);
+	}
+
+	/* Color and background are still provided by GitHub's `.UnderlineNav .Counter` */
+	.Counter {
+		display: inline-block;
+		min-width: 20px;
+		padding: 0 6px;
+		border: 1px solid var(--counter-borderColor, fuchsia);
+		border-radius: 2em;
+		font-size: 12px;
+		font-weight: 500;
+		line-height: 18px;
+		text-align: center;
+	}
+}
+
 .rgh-extensible-nav-removed {
 	position: absolute;
 	top: -200px;

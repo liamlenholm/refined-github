@@ -18,6 +18,46 @@ html:not([rgh-OFF-repo-header-info]) {
 		}
 	}
 
+	/* GitHub's new Primer CSS no longer includes `.dropdown-menu`. `:where` lets GitHub's own popover rules still take precedence */
+	:where(.rgh-ci-link .dropdown-menu) {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		z-index: 100;
+		background-color: var(--overlay-bgColor, fuchsia);
+		background-clip: padding-box;
+		border: 1px solid var(--borderColor-default, fuchsia);
+		border-radius: 6px;
+		box-shadow: var(--shadow-floating-small);
+
+		&::before,
+		&::after {
+			content: '';
+			position: absolute;
+			display: inline-block;
+		}
+	}
+
+	:where(.rgh-ci-link .dropdown-menu-e) {
+		top: 0;
+		left: 100%;
+		margin-left: 8px;
+
+		&::before {
+			top: 10px;
+			left: -16px;
+			border: 8px solid transparent;
+			border-right-color: var(--borderColor-default, fuchsia);
+		}
+
+		&::after {
+			top: 11px;
+			left: -14px;
+			border: 7px solid transparent;
+			border-right-color: var(--overlay-bgColor, fuchsia);
+		}
+	}
+
 	/* Improve alignment */
 	.rgh-ci-link .commit-build-statuses {
 		font-size: 0;
@@ -69,6 +109,9 @@ html:not([rgh-OFF-repo-header-info]) {
 
 			.merge-status-item .css-truncate-target {
 				max-width: 100%;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
 			}
 
 			.status-actions {
